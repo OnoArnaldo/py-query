@@ -26,7 +26,7 @@ query = (q.Select()
          .where(q.And(
             q.Equals('field1', 900), 
             q.Like('field2', '%value%')
-        )))
+        )).limit(5))
 
 conn = Connection('data.db')
 with conn:

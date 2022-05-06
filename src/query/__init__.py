@@ -6,15 +6,17 @@ Criteria = _.TypeVar('Criteria')
 class Select:
     def __init__(self):
         self._table_name = ''
+        self._limit: int = None
         self._fields = []
         self._where: Criteria = ''
 
     def __str__(self) -> str:
         fields = ', '.join(self._fields)
         where = str(self._where)
+        limit = '' if self._limit is None else f' LIMIT {self._limit}'
         if len(where) != 0:
             where = f' WHERE {where}'
-        return f'SELECT {fields} FROM {self._table_name}{where}'
+        return f'SELECT {fields} FROM {self._table_name}{where}{limit}'
 
     @property
     def values(self) -> list:
@@ -30,6 +32,10 @@ class Select:
 
     def where(self, criteria: Criteria) -> 'Select':
         self._where = criteria
+        return self
+
+    def limit(self, value: int) -> 'Select':
+        self._limit = value
         return self
 
 
