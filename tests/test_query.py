@@ -21,3 +21,12 @@ def test():
                           'LIMIT 5')
 
     assert query.values == [100, 500, 50, '%val%', 600, 60]
+
+
+def test_without_where():
+    query = q.Select()\
+        .fields('1')\
+        .from_table('THE_TABLE')
+
+    assert str(query) == 'SELECT 1 FROM THE_TABLE'
+    assert query.values == []

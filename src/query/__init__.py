@@ -8,19 +8,22 @@ class Select:
         self._table_name = ''
         self._limit: int = None
         self._fields = []
-        self._where: Criteria = ''
+        self._where: Criteria = None
 
     def __str__(self) -> str:
         fields = ', '.join(self._fields)
-        where = str(self._where)
         limit = '' if self._limit is None else f' LIMIT {self._limit}'
-        if len(where) != 0:
-            where = f' WHERE {where}'
+        where = ''
+        if self._where is not None:
+            where = f' WHERE {self._where}'
+
         return f'SELECT {fields} FROM {self._table_name}{where}{limit}'
 
     @property
     def values(self) -> list:
-        return self._where.values
+        if self._where is not None:
+            return self._where.values
+        return []
 
     def from_table(self, table_name: str) -> 'Select':
         self._table_name = table_name
