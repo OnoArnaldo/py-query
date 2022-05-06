@@ -5,9 +5,9 @@ here = pathlib.Path(__file__).parent.resolve()
 long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
-    name='your_project',
+    name='query',
     version='0.0.0.0',
-    description='the project description',
+    description='Build query for sqlite.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='Arnaldo Ono',
@@ -21,11 +21,11 @@ setup(
     ],
 
     keywords='flask',
-    package_dir={'': 'src', 'your_project': 'src/your_project'},
+    package_dir={'': 'src', 'query': 'src/query'},
     packages=find_packages(where='src'),
     python_requires='>=3.10',
 
-    install_requires=['flask'],
+    install_requires=[],
     extras_require={
         'test': ['pytest'],
     },
